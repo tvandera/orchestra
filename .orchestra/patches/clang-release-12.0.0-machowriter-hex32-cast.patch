@@ -1,0 +1,23 @@
+commit e91a0f099b51577183076432b03807a5dad250de
+Author: Tom Vander Aa <vanderaa@imec.be>
+Date:   Fri Sep 17 13:45:46 2021 +0200
+
+    FIX: fix compilation error on Hex32 <-> int comparison
+
+diff --git a/lld/lib/ReaderWriter/MachO/MachONormalizedFileBinaryWriter.cpp b/lld/lib/ReaderWriter/MachO/MachONormalizedFileBinaryWriter.cpp
+index 17b45b9ca82..65270f4d44e 100644
+--- a/lld/lib/ReaderWriter/MachO/MachONormalizedFileBinaryWriter.cpp
++++ b/lld/lib/ReaderWriter/MachO/MachONormalizedFileBinaryWriter.cpp
+@@ -1294,10 +1294,10 @@ void TrieNode::addSymbol(const Export& entry,
+     }
+   }
+   if (entry.flags & EXPORT_SYMBOL_FLAGS_REEXPORT) {
+-    assert(entry.otherOffset != 0);
++    assert(entry.otherOffset != Hex32(0));
+   }
+   if (entry.flags & EXPORT_SYMBOL_FLAGS_STUB_AND_RESOLVER) {
+-    assert(entry.otherOffset != 0);
++    assert(entry.otherOffset != Hex32(0));
+   }
+   // No commonality with any existing child, make a new edge.
+   auto *newNode = new (allocator) TrieNode(entry.name.copy(allocator));
