@@ -19,7 +19,7 @@ builds:
         mkdir -p "$BUILD_DIR"
         cd "$BUILD_DIR";
         "$SOURCE_DIR/configure" \
-          --cc="(@= data.values.regular_c_compiler @)" \
+          --cc=clang \
           --prefix="$ORCHESTRA_ROOT" \
           --target-list=" arm-libtinycode arm-linux-user aarch64-libtinycode aarch64-linux-user i386-libtinycode i386-linux-user mips-libtinycode mips-linux-user mipsel-libtinycode mipsel-linux-user s390x-libtinycode s390x-linux-user x86_64-libtinycode x86_64-linux-user " \
           --disable-werror \
@@ -41,8 +41,6 @@ builds:
         cd "$BUILD_DIR"
         (@= make @) install
       build_dependencies:
-        - host-c-toolchain
-        - clang-release
         - glibc
         - llvm
       dependencies:

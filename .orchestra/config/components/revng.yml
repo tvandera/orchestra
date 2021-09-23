@@ -9,13 +9,12 @@ build_dependencies:
   - cmake
   - revng-qa
   - glibc
-  - host-cxx-toolchain
+  - llvm
 dependencies:
   - host-libcxx
   - llvm
   - qemu
   - boost
-  - clang-release
 use_asan: false
 #@ end
 
