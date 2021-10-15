@@ -35,7 +35,8 @@ builds:
         CLANG_RELEASE_IDX="$ORCHESTRA_ROOT/share/orchestra/clang-release.idx"
         if [ -e "$CLANG_RELEASE_IDX" ]; then
           cat "$CLANG_RELEASE_IDX" | while read f; do
-            rm -f "${TMP_ROOT}${ORCHESTRA_ROOT}/$f" || true
+            full_path="${TMP_ROOT}${ORCHESTRA_ROOT}/$f"
+            test -f $full_path && mv $full_path ${full_path}.llvm || true
           done
         fi
 
