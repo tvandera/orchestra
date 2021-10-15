@@ -46,9 +46,7 @@ toolchain/macos/(@= name @)/ld64:
         (@= make @)
         (@= make @) install
       build_dependencies:
-        - host-cxx-toolchain
       dependencies:
-        - host-libcxx
         - toolchain/macos/libtapi
 #@ end
 #@ end

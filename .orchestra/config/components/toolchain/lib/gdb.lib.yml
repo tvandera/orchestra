@@ -59,7 +59,6 @@ configure: |
     CXXFLAGS="-w -ggdb3 -O3"
 build_system: make
 build_dependencies:
-  - glibc
   - zlib
 #@ end
 

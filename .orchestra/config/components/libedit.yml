@@ -20,7 +20,6 @@ configure: |
 build_system: make
 build_dependencies:
   - gcc-host-toolchain
-  - glibc
 dependencies:
   - ncurses
 #@ end

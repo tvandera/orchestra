@@ -37,9 +37,7 @@ builds:
       cp -a projects/libtapi/include/tapi/Version.inc "${TMP_ROOT}${ORCHESTRA_ROOT}/include/tapi/"
     build_dependencies:
       - cmake
-      - host-cxx-toolchain
     dependencies:
-      - host-libcxx
 #@ end
 
 #@overlay/match by=overlay.all, expects=1

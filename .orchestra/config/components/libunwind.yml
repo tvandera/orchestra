@@ -28,7 +28,6 @@ configure: |
 build_system: make
 build_dependencies:
   - gcc-host-toolchain
-  - glibc
 #@ end
 
 #@overlay/match by=overlay.all, expects=1

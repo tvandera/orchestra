@@ -8,23 +8,19 @@ components:
     builds:
       default:
         dependencies:
-          - glibc
           - toolchain/host/binutils
           - toolchain/host/gcc
         install: exit 0
         configure: mkdir -p "$BUILD_DIR"
 
-  host-cxx-toolchain:
     builds:
       default:
         dependencies:
-          - glibc
           - toolchain/host/binutils
           - toolchain/host/gcc
         install: exit 0
         configure: mkdir -p "$BUILD_DIR"
 
-  host-libcxx:
     builds:
       default:
         dependencies:

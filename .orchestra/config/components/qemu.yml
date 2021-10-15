@@ -41,7 +41,6 @@ builds:
         cd "$BUILD_DIR"
         (@= make @) install
       build_dependencies:
-        - glibc
         - llvm
       dependencies:
         - zlib

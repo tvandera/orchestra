@@ -41,7 +41,6 @@
 #@ if/end stage == 2 and "host" not in toolchain_name:
 - toolchain/(@= toolchain_name @)/gcc~stage1
 
-- glibc
 - gmp
 - mpfr
 - mpc

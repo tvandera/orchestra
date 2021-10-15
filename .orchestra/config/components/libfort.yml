@@ -7,9 +7,7 @@ source_url: "https://github.com/seleznevae/libfort/archive/v0.4.2.tar.gz"
 build_dependencies:
   - gcc-host-toolchain
   - cmake
-  - glibc
 dependencies:
-  - host-libcxx
 use_asan: false
 #@ end
 
