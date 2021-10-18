@@ -4,27 +4,12 @@
 #! You should define them in a separate file and use overlay annotations.
 components: {}
 add_to_path:
-  - $ORCHESTRA_ROOT/link-only/bin
   - $ORCHESTRA_ROOT/bin
   - $ORCHESTRA_DOTDIR/support
 environment:
   - JOBS: #@ str(datavalue("parallelism"))
   - PKG_CONFIG_PATH: $ORCHESTRA_ROOT/lib/pkgconfig:$ORCHESTRA_ROOT/share/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
-  - INSTALL_LINK_ONLY_PATH: $ORCHESTRA_ROOT/link-only
   - PYTHONPATH: $ORCHESTRA_ROOT/lib/python${PYTHONPATH:+:${PYTHONPATH}}
-  - LIBRARY_PATH: /usr/lib/x86_64-linux-gnu
-  - HARD_FLAGS_COMPILE: #@ str(datavalue("hard_flags_compile"))
-  - HARD_FLAGS_CXX_CLANG: #@ str(datavalue("hard_flags_cxx_clang"))
-  - HARD_FLAGS_CLANG: #@ str(datavalue("hard_flags_clang"))
-  - HARD_FLAGS_LINK: #@ str(datavalue("hard_flags_link"))
-  - HARD_FLAGS_LINK_LATE: #@ str(datavalue("hard_flags_link_late"))
-  - HARD_FLAGS_LINK_GOLD: #@ str(datavalue("hard_flags_link_gold"))
-  - "-LD_LIBRARY_PATH": ""
-  - "-COMPILER_PATH": ""
-  - "-CPATH": ""
-  - "-C_INCLUDE_PATH": ""
-  - "-CPLUS_INCLUDE_PATH": ""
-  - "-OBJC_INCLUDE_PATH": ""
 min_orchestra_version: "3.2.0"
 
 paths: #@ datavalue("paths", default={})
