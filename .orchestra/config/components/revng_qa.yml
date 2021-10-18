@@ -18,7 +18,8 @@ configure: |
     -DTRIPLE_i386="i386-gentoo-linux-musl" \
     -DTRIPLE_arm="armv7a-hardfloat-linux-uclibceabi" \
     -DTRIPLE_aarch64="aarch64-unknown-linux-musl" \
-    -DTRIPLE_s390x="s390x-ibm-linux-musl"
+    -DTRIPLE_s390x="s390x-ibm-linux-musl" \
+    -DTRIPLE_riscv64="riscv64-unknown-linux-musl"
 build_system: make
 build_dependencies:
   - qemu
@@ -29,6 +30,7 @@ build_dependencies:
   - toolchain/s390x/gcc
   - toolchain/mips/gcc
   - toolchain/mipsel/gcc
+  - toolchain/riscv64/gcc
 #@ end
 
 #@overlay/match by=overlay.all, expects=1
