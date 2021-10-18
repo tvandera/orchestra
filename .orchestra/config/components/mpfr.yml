@@ -22,7 +22,6 @@ configure: |
 build_system: make
 dependencies:
   - gmp
-build_dependencies:
 #@ end
 
 #@overlay/match by=overlay.all, expects=1

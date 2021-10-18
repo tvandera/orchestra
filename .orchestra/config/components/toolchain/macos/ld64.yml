@@ -45,7 +45,6 @@ toolchain/macos/(@= name @)/ld64:
         cd "$BUILD_DIR/cctools"
         (@= make @)
         (@= make @) install
-      build_dependencies:
       dependencies:
         - toolchain/macos/libtapi
 #@ end

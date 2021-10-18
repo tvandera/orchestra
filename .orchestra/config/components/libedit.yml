@@ -18,8 +18,6 @@ configure: |
     --enable-shared \
     --prefix="$ORCHESTRA_ROOT"
 build_system: make
-build_dependencies:
-  - gcc-host-toolchain
 dependencies:
   - ncurses
 #@ end

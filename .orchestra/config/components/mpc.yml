@@ -23,7 +23,6 @@ build_system: make
 dependencies:
   - gmp
   - mpfr
-build_dependencies:
 #@ end
 
 #@overlay/match by=overlay.all, expects=1

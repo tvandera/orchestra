@@ -54,11 +54,6 @@ configure: |
 build_system: make
 add_to_path:
   - ${ORCHESTRA_ROOT}/x86_64-pc-linux-gnu/(@= triple @)/binutils-bin/(@= binutils_version @)
-build_dependencies:
-  - toolchain/host/gcc
-#@ if "host" not in toolchain_name:
-  - toolchain/host/binutils
-#@ end
 
 #@ end
 

@@ -5,7 +5,6 @@
 #@ def build_args():
 source_url: "https://github.com/seleznevae/libfort/archive/v0.4.2.tar.gz"
 build_dependencies:
-  - gcc-host-toolchain
   - cmake
 dependencies:
 use_asan: false

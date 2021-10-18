@@ -24,8 +24,6 @@ configure: |
     --disable-libdebuginfod \
     CFLAGS="-Wno-error"
 build_system: make
-build_dependencies:
-  - host-c-toolchain
 dependencies:
   - zlib
 #@ end

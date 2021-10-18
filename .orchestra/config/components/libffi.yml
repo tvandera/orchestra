@@ -20,8 +20,6 @@ configure: |
     --disable-debug \
     --prefix="$ORCHESTRA_ROOT"
 build_system: make
-build_dependencies:
-  - host-c-toolchain
 #@ end
 
 #@overlay/match by=overlay.all, expects=1
