@@ -17,7 +17,7 @@ configure: |
   sed -i -e '/subdir.*tests/d' "$BUILD_DIR"/source/{.,gio,glib}/meson.build
 
   CC=gcc \
-  CXX=gcc++ \
+  CXX=g++ \
   meson setup \
     --buildtype plain \
     --libdir=lib \
@@ -42,8 +42,6 @@ install: |
   export LANG=
   (@= ninja @)
   (@= ninja @) install
-build_dependencies:
-  - host-c-toolchain
 dependencies:
   - libffi
   - zlib
