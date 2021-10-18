@@ -10,8 +10,6 @@ builds:
   default:
     dependencies:
       - llvm
-    build_dependencies:
-      - cmake
     configure: |
       rm -rf "$BUILD_DIR"
       mkdir -p $(dirname "$BUILD_DIR")

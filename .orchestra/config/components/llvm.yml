@@ -44,8 +44,6 @@ builds:
           (@= ninja @) check-all
         fi
 
-      build_dependencies:
-        - cmake
       dependencies:
         - libunwind
       #@ if/end ndebug == False:
