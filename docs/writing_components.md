@@ -106,15 +106,11 @@ See `caliban` as an example:
 #@ load("@ytt:overlay", "overlay")
 
 #@ load("/lib/optimization_flavors.lib.yml", "typical_project_flavors")
-#@ load("/lib/cmake.lib.yml", "cmake_boost_configuration", "typical_cmake_builds")
 
 #@ load("/global_options.lib.yml", "options")
 
 ---
 #@ def build_args():
-extra_cmake_args: #@ cmake_boost_configuration
-build_dependencies:
-  - cmake
 dependencies:
   - clang-release
   #! rest of the dependencies...

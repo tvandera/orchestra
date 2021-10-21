@@ -20,7 +20,6 @@
 
 #@ if "host" not in toolchain_name:
 - toolchain/(@= toolchain_name @)/binutils
-- toolchain/host/binutils
 #@ end
 
 #@ if/end musl_version:
@@ -85,10 +84,6 @@ configure: |
   patch-if-exists "${ORCHESTRA_DOTDIR}/patches/gcc-(@= gcc_version @)-cfns-fix-mismatch-in-gnu_inline-attributes.patch" "$SOURCE_DIR"
   patch-if-exists "${ORCHESTRA_DOTDIR}/patches/gcc-(@= gcc_version @)-cpp-musl-support.patch" "$SOURCE_DIR"
   sed -i 's|gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"|gcc_gxx_include_dir="/${gcc_gxx_without_sysroot#/}"|' "$SOURCE_DIR/gcc/configure"
-  (@ if "host" in toolchain_name: @)
-  sed -i "s|SHLIB_LINK = .(CC)|\0 -L$ORCHESTRA_ROOT/link-only/lib|" "$SOURCE_DIR/libgcc/config/t-slibgcc"
-  sed -i 's|@multilib_flags@||' "$SOURCE_DIR/libgcc/config/t-slibgcc"
-  (@ end @)
 
   mkdir -p "$BUILD_DIR"
   cd "$BUILD_DIR" && "$SOURCE_DIR/configure" \
@@ -135,50 +130,13 @@ configure: |
     --without-zstd \
     (@= expand_args(extra_gcc_configure_options) @) \
     (@= expand_args(build_specific_configure_options) @) \
-    CFLAGS="-w -ggdb3 -O3 (@= data.values.hard_flags_compile @)" \
-    CXXFLAGS="-w -ggdb3 -O3 (@= data.values.hard_flags_compile @)" \
-    LDFLAGS="(@= data.values.hard_flags_link @) (@= data.values.hard_flags_link_late @) -static-libgcc"
+    CFLAGS="-w -ggdb3 -O3" \
+    CXXFLAGS="-w -ggdb3 -O3" \
+    LDFLAGS="-static-libgcc"
 install: |
   cd "$BUILD_DIR"
   (@= make @) (@= extra_gcc_make_variables @)
   (@= serial_make @) install (@= extra_gcc_make_variables @)
-
-  NEW_GCC_PATH="(@= new_gcc_path(triple=triple, gcc_version=gcc_version) @)"
-
-  if test -e "${DESTDIR}${NEW_GCC_PATH}/gcc"; then
-
-    if ! test -e "${DESTDIR}${NEW_GCC_PATH}/cc"; then
-      ln -s gcc "${DESTDIR}${NEW_GCC_PATH}/cc"
-    fi
-
-    mkdir -p "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin"
-    cp "${ORCHESTRA_DOTDIR}/support/hard-flags-compiler-wrapper.py" "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/gcc"
-    ln -s gcc "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/cc"
-    ln -s gcc "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/x86_64-pc-linux-gnu-cc"
-    ln -s gcc "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/x86_64-pc-linux-gnu-gcc"
-
-    cp -a "${DESTDIR}${ORCHESTRA_ROOT}"/lib/gcc/x86_64-pc-linux-gnu/(@= gcc_version @)/*.{a,o} "${DESTDIR}${ORCHESTRA_ROOT}"/lib/
-
-  fi
-
-  if test -e "${DESTDIR}${NEW_GCC_PATH}/g++"; then
-
-    if ! test -e "${DESTDIR}${NEW_GCC_PATH}/c++"; then
-      ln -s g++ "${DESTDIR}${NEW_GCC_PATH}/c++"
-    fi
-
-    cp "${ORCHESTRA_DOTDIR}/support/hard-flags-compiler-wrapper.py" "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/g++"
-    ln -s g++ "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/x86_64-pc-linux-gnu-g++"
-    mkdir -p "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin"
-    ln -s g++ "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/c++"
-    ln -s g++ "${DESTDIR}${ORCHESTRA_ROOT}/link-only/bin/x86_64-pc-linux-gnu-c++"
-
-  fi
-
-  rm -f "${DESTDIR}${ORCHESTRA_ROOT}"/lib64/libcc1.*
-
-  # Fixinclude locates the wrong pthread.h
-  find "${DESTDIR}${ORCHESTRA_ROOT}" -type d -name include-fixed -exec rm -f {}/pthread.h \;
 
 dependencies: #@ dependencies
 build_dependencies: #@ build_dependencies

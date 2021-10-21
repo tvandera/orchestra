@@ -34,16 +34,6 @@
 
 ---
 
-#@ def _cmake_boost_configuration():
-- -DBOOST_ROOT="$ORCHESTRA_ROOT"
-- -DBoost_NO_BOOST_CMAKE=On
-- -DBoost_NO_SYSTEM_PATHS=On
-#@ end
-
-#@ cmake_boost_configuration = _cmake_boost_configuration()
-
----
-
 #@yaml/text-templated-strings
 ---
 #@ def typical_cmake_builds(

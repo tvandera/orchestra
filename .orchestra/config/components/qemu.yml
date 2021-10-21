@@ -42,6 +42,8 @@ builds:
         (@= make @) install
       build_dependencies:
         - llvm
+        - toolchain/x86-64/gcc
+        - toolchain/riscv64/gcc
       dependencies:
         - zlib
         - glib
