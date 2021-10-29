@@ -11,6 +11,9 @@ dependencies:
   - llvm
   - qemu
 use_asan: false
+use_libcxx: true
+extra_cmake_args:
+  - -DLLVM_DIR=$ORCHESTRA_ROOT/lib/cmake/llvm
 #@ end
 
 #@overlay/match by=overlay.all, expects=1

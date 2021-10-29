@@ -42,6 +42,7 @@
 #@        dependencies=[],
 #@        build_dependencies=[],
 #@        use_asan=False,
+#@        use_libcxx=False,
 #@        source_url=None,
 #@        pre_configure_script="",
 #@        post_configure_script="",
@@ -50,7 +51,7 @@
 #@        test=False,
 #@ ):
 
-#@ for flavor, opts in typical_cmake_flavors(use_asan=use_asan).items():
+#@ for flavor, opts in typical_cmake_flavors(use_asan=use_asan, use_libcxx=use_libcxx).items():
 (@= flavor @):
   configure: |
     (@- if pre_configure_script: @)
@@ -67,7 +68,11 @@
     (@= cmake @) \
       "$SOURCE_DIR" \
       -G"(@= build_system @)" \
-      (@= expand_args(cmdline_cmake_base_configuration(cmake_build_type=opts["cmake_build_type"], extra_compiler_flags=opts["extra_compiler_flags"])) @) \
+      (@= expand_args(cmdline_cmake_base_configuration( \
+        cmake_build_type=opts["cmake_build_type"], \
+        extra_compiler_flags=opts["extra_compiler_flags"], \
+        extra_cxx_flags=opts["extra_cxx_flags"], \
+      )) @) \
       (@= expand_args(extra_cmake_args) @)
 
     (@- if post_configure_script: @)

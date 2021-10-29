@@ -14,48 +14,56 @@ o3: -ggdb3 -Wl,--gc-sections -ffunction-sections -O3
 
 #@yaml/text-templated-strings
 ---
-#@ def _typical_project_flavors(use_asan=False):
+#@ def _typical_project_flavors(use_asan=False, use_libcxx=False):
 #@   asan="-fsanitize=address" if use_asan else ""
+#@   libcxx="-stdlib=libc++" if use_libcxx else ""
 optimized:
   cmake_build_type: Debug
   extra_compiler_flags: -ggdb3 -O2 -fno-omit-frame-pointer (@= asan @)
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: false
 debug:
   cmake_build_type: Debug
-  extra_compiler_flags: -ggdb3 -O0 (@= asan @)
+  extra_compiler_flags: -ggdb3 -O0 (@= asan @) 
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: false
 release:
   cmake_build_type: Release
   extra_compiler_flags: -ggdb3 -O2 (@= asan @)
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: true
 #@ end
 
 ---
-#@ def typical_project_flavors(use_asan=False):
-#@    return dict(_typical_project_flavors(use_asan=use_asan))
+#@ def typical_project_flavors(use_asan=False, use_libcxx=False):
+#@    return dict(_typical_project_flavors(use_asan=use_asan, use_libcxx=use_libcxx))
 #@ end
 
 #@yaml/text-templated-strings
 ---
-#@ def _typical_cmake_flavors(use_asan=False):
+#@ def _typical_cmake_flavors(use_asan=False, use_libcxx=False):
 #@   asan="-fsanitize=address" if use_asan else ""
+#@   libcxx="-stdlib=libc++" if use_libcxx else ""
 optimized:
   cmake_build_type: Debug
   extra_compiler_flags: -ggdb3 -O2 -fno-omit-frame-pointer (@= asan @)
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: false
 debug:
   cmake_build_type: Debug
   extra_compiler_flags: -ggdb3 -O0 (@= asan @)
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: false
 release:
   cmake_build_type: Release
   extra_compiler_flags: -ggdb3 -O2 (@= asan @)
+  extra_cxx_flags: (@= libcxx @) 
   ndebug: true
 #@ end
 
 ---
-#@ def typical_cmake_flavors(use_asan=False):
-#@    return dict(_typical_cmake_flavors(use_asan=use_asan))
+#@ def typical_cmake_flavors(use_asan=False, use_libcxx=False):
+#@    return dict(_typical_cmake_flavors(use_asan=use_asan, use_libcxx=use_libcxx))
 #@ end
 
 ---
