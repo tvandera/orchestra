@@ -34,3 +34,6 @@ nonredistributable_base_url: "https://dummydomain.com/nonredistributable/"
 
 remote_base_urls:
   - origin: "https://dummydomain.com/revng"
+
+binary_archives:
+  - origin: "https://dummydomain.com/binary-archives"
